@@ -31,6 +31,7 @@ class LanguageController extends Controller
             }
         else {
             createCookie('lang', $newLang, 168);
+            $_COOKIE['lang'] = $newLang;
         }
 
         IndexController::index();

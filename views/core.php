@@ -85,30 +85,27 @@ function showAllWithView($requestedView)
             <a id="mentions" href="/?controller=mentions&action=mentions">Mentions légales</a>
 
             <p class="w3">
-                <a target="_blank"
-                   href="https://validator.w3.org/nu/?doc=<?php echo getFullURL(); ?>">
+                <a target="_blank"  href="https://validator.w3.org/nu/?doc=<?php echo getFullURL(); ?>">
                     <img src="/views/images/valid-html5.png" alt="Valid XHTML5">
                 </a>
-                <a target="_blank"
-                   href="http://jigsaw.w3.org/css-validator/check/referer?profile=css3&amp;usermedium=all&amp;warning=no&amp;vextwarning=true">
+                <a target="_blank"  href="http://jigsaw.w3.org/css-validator/check/referer?profile=css3&amp;usermedium=all&amp;warning=no&amp;vextwarning=true">
                     <img src="/views/images/valid-css3.png" alt="Valid CSS3">
                 </a>
             </p>
 
             <form id="form-lang" action="/?controller=language&action=changeLanguage" method="post">
                 <div id="choose-language">
-                    <select name="lang" class="selectpicker"  onchange="this.form.submit()" onclick="this.form.submit()" >
+                <input type="hidden" name="lang" id="hidden-language" value="English">
 
                     <?php
 
-                    
                     $languages = $translator->getLanguages();
 
                     foreach ($languages as $key => $value)
-                         echo '<option  value="' . $key . '">' . $value . '</option>'
+                         echo '<input type="submit" onclick="document.getElementById(\'hidden-language\').value = \'' . $key . '\';"  value="' . $value . '"></input>'
 
                     ?> 
-                    </select>
+                 
                 </div>
             </form>
         </footer>

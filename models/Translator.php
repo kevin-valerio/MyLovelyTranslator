@@ -20,9 +20,7 @@ require_once 'controllers/LanguageController.php';
             $pdo = Database::getConnection();
             $query = $pdo->prepare ("SELECT expression FROM " . $this->$mainLanguage . " WHERE id = '" . $id . "'");          
             $query->execute();
-            $fetchedTranslate = $query->fetch();
-             
-         
+            $fetchedTranslate = $query->fetch(); 
             return $fetchedTranslate[0];
   
         }
