@@ -12,15 +12,13 @@ class Controller
 
     public static function getLangueInAnyContext(){
         $langue = NULL;
-        if(!is_null(self::$mainUser)) {
+     /*   if(!is_null(self::$mainUser)) {
              $langue = self::$mainUser->getPrefLangue();
-             var_dump($langue);
-             $langue = Translator::getLanguages()[$langue];
-           
+             $langue = Translator::getLanguages()[$langue];           
          }    
-        else { 
+        else { */
             $langue = $_COOKIE['lang']; 
-         }         
+     //    }         
         return $langue;
 
     }

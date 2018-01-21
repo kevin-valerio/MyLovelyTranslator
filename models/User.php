@@ -8,7 +8,7 @@
         private $prefLanguage;
         private $grade;
         private $registerKey;
-
+ 
         public function __construct($mail, $username, $pw, $prefLang, $grade)
         {
             $this->mailAdress = $mail;
@@ -18,7 +18,7 @@
             $this->grade = $grade;
         }
 
-
+ 
         public static function unlockAccountWithKey($key){
             
             try{

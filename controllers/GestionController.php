@@ -65,14 +65,16 @@ class GestionController extends Controller
         if($user->getGrade() < 3) IndexController::index();
 
         $exprID = filter_input(INPUT_POST, "expressionID");
+        $translation =filter_input(INPUT_POST, "translation");
         $langue = filter_input(INPUT_POST, "language");
 
-        if(empty($langue) OR empty($exprID))
-            showAllWithView("/controller=gestion&action=changes&info=50");
-
-
         $translatorBis = new Translator($langue);
+        $added = $translatorBis->add($exprID,$translation, true);
 
+        if($added)
+            redirect("/?controller=gestion&action=changes&info=50");
+        else
+            redirect("/?controller=gestion&action=changes&info=51");
 
 
         $_SESSION["phrases-changes"] = $translatorBis->getTranslations();

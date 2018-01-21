@@ -28,11 +28,10 @@ class LanguageController extends Controller
 
         if (!is_null($user)) {
              $user->setPrefLanguage($newLang); 
-            }
-        else {
-            createCookie('lang', $newLang, 168);
-            $_COOKIE['lang'] = $newLang;
         }
+
+        createCookie('lang', $newLang, 168);
+        $_COOKIE['lang'] = $newLang;
 
         IndexController::index();
     }

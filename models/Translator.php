@@ -9,7 +9,8 @@ require_once 'models/Translation.php';
 
       
         function __construct($language){      
-              $this->$mainLanguage = $language;
+              $this->$mainLanguage = $language;           
+
           }
 
          public static function  getLanguages(){
@@ -17,11 +18,24 @@ require_once 'models/Translation.php';
          } 
 
         public function getTranslate($id) {
-
             $pdo = Database::getConnection();
-            $query = $pdo->prepare ("SELECT expression FROM " . $this->$mainLanguage . " WHERE id = '" . $id . "'");
-            $query->execute();
-            $fetchedTranslate = $query->fetch(); 
+
+            try{
+                $query = $pdo->prepare ("SELECT expression FROM " . $this->$mainLanguage . " WHERE id = '" . $id . "'");
+                $query->execute();
+                $fetchedTranslate = $query->fetch(); 
+
+            }
+            catch (PDOException $e){
+  
+               $this->$mainLanguage = array_search($this->$mainLanguage, self::$languageArray);
+ 
+                $query = $pdo->prepare ("SELECT expression FROM " . $this->$mainLanguage . " WHERE id = '" . $id . "'");
+                $query->execute();
+                $fetchedTranslate = $query->fetch();
+
+            }
+ 
             return $fetchedTranslate[0];
   
         }
@@ -29,7 +43,8 @@ require_once 'models/Translation.php';
         public function getTranslations(){
 
             $pdo = Database::getConnection();
-            $req = "SELECT * FROM " . self::$languageArray[$this->$mainLanguage];
+            $langue = $_COOKIE['lang'];
+            $req = "SELECT * FROM " .  $langue;
             $query = $pdo->prepare ($req);
             $query->execute();
 
@@ -45,8 +60,8 @@ require_once 'models/Translation.php';
 
         public function add($exprId, $expression, $update){
             $pdo = Database::getConnection();
-
-            $query = $pdo->prepare ("SELECT expression FROM ". self::$languageArray[$this->$mainLanguage] ." WHERE id = :id");
+            $langue = $_COOKIE['lang'];
+            $query = $pdo->prepare ("SELECT expression FROM ".  $langue ." WHERE id = :id");
             $query->execute(array(
                 "id" => $exprId
             ));

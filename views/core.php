@@ -5,12 +5,17 @@ require_once "utils/util.php";
 
 function showAllWithView($requestedView)
 {
-    Controller::defineDefaultLanguage();
+    /* Todo : probleme : à chaque visite de core, ça revient en Français.
+     Faire en sorte que si on clique sur une nouvelle langue, on garde cette langue pendant longtemps */
 
     $account = Controller::getMainUser();
+
+    
+    Controller::defineDefaultLanguage();
+
     $langue = Controller::getLangueInAnyContext();
     $translator = new Translator($langue);
-    session_start(); 
+     session_start(); 
 ?>
 
     <!DOCTYPE html>
@@ -116,7 +121,7 @@ function showAllWithView($requestedView)
                     <?php
                     $languages = $translator->getLanguages();
                     foreach ($languages as $key => $value)
-                         echo '  <input type="submit" class="btn btn-secondary btn-m" onclick="document.getElementById(\'hidden-language\').value = \'' . $key . '\';"  value="' . $value . '"></input> '
+                         echo '  <input type="submit" class="btn btn-secondary btn-m" onclick="document.getElementById(\'hidden-language\').value = \'' . $value . '\';"  value="' . $value . '"></input> '
                     ?>                  
                 </div>
             </form>
