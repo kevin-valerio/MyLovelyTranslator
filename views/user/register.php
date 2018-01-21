@@ -55,17 +55,17 @@
         <!-- Privilege/Grade -->
         <div class="form-check">
             <label>
-                <input type="radio" name="grade" checked value="1"> <span class="label-text">Standard</span>
+                <input type="radio" name="grade" checked value="1"> <span class="label-text"><?php echo $translator->getTranslate(12); ?></span>
             </label>
         </div>
         <div class="form-check">
             <label>
-                <input type="radio" name="grade" value="2"> <span class="label-text">Premium</span>
+                <input type="radio" name="grade" value="2"> <span class="label-text"><?php echo $translator->getTranslate(13); ?></span>
             </label>
         </div>
         <div class="form-check">
             <label>
-                <input type="radio" name="grade" value="3"> <span class="label-text">Traducteur</span>
+                <input type="radio" name="grade" value="3"> <span class="label-text"><?php echo $translator->getTranslate(14); ?></span>
             </label>
         </div>
         <div class="form-check">

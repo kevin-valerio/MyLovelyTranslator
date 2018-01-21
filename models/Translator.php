@@ -1,5 +1,7 @@
 <?php
 require_once 'controllers/LanguageController.php';
+require_once 'models/Translation.php';
+
     class Translator {
 
         private $mainLanguage;
@@ -31,10 +33,17 @@ require_once 'controllers/LanguageController.php';
             $query = $pdo->prepare ($req);
             $query->execute();
 
-            return $query;
+            if(empty($query)) return null;
+
+            $translations = [];
+            while($tuple = $query->fetch())
+                array_push($translations, new Translation($tuple["id"], $tuple["expression"]));
+
+
+            return $translations;
         }
 
-        public function add($exprId, $expression){
+        public function add($exprId, $expression, $update){
             $pdo = Database::getConnection();
 
             $query = $pdo->prepare ("SELECT expression FROM ". self::$languageArray[$this->$mainLanguage] ." WHERE id = :id");
@@ -43,7 +52,11 @@ require_once 'controllers/LanguageController.php';
             ));
             $expr = $query->fetch()["expression"];
 
-            if(isset($expr)){
+            /*
+             * si l'expression existe déjà
+             * et que le booleen update est a true
+             */
+            if(isset($expr) AND $update){
                 $query = $pdo->prepare("UPDATE ". self::$languageArray[$this->$mainLanguage]  .
                                                 " SET expression= :expression WHERE id= :id ");
             }else {
@@ -56,6 +69,10 @@ require_once 'controllers/LanguageController.php';
             ));
 
             return $query == true;
+        }
+
+        public function change($exprId, $expression){
+
         }
 
       

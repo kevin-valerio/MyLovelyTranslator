@@ -1,8 +1,0 @@
-[Error]
-message: Need host
-[Stack Trace]
-Error: Need host
-    at set (C:\Users\Utilisateur\.vscode\extensions\ruakr.ftp-kr-1.1.7\out\config.js:128:19)
-    at Object.<anonymous> (C:\Users\Utilisateur\.vscode\extensions\ruakr.ftp-kr-1.1.7\out\config.js:178:9)
-    at Generator.next (<anonymous>)
-    at fulfilled (C:\Users\Utilisateur\.vscode\extensions\ruakr.ftp-kr-1.1.7\out\config.js:4:58)

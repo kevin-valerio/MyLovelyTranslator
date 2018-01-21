@@ -9,7 +9,6 @@ function showAllWithView($requestedView)
 
     $account = Controller::getMainUser();
     $langue = Controller::getLangueInAnyContext();
-
     $translator = new Translator($langue);
     session_start(); 
 ?>
@@ -59,6 +58,7 @@ function showAllWithView($requestedView)
                 <span class="navbar-text">
             <?php
             if (is_null($account)) {
+                /* New user, unlogged */
                 ?>
                 <a href="/?controller=user&action=login" class="btn btn-primary btn-lg " role="button"
                    aria-pressed="true"><?php echo $translator->getTranslate(3); ?></a>
@@ -67,20 +67,21 @@ function showAllWithView($requestedView)
 
             <?php
             } else {
+                /* Logged account */
                     if($account->getGrade() == 3){ ?>
-                        <a href="/?controller=gestion&action=mainHandler" class="btn btn-primary btn-lg " role="button"
-                        aria-pressed="true"><?php echo $translator->getTranslate(16); ?></a>
-<?php                }
+                        <a href="/?controller=gestion&action=mainHandler" class="btn btn-primary btn-lg " role="button" aria-pressed="true"><?php echo $translator->getTranslate(16); ?></a>
+                <?php  }
                     if($account->getGrade() == 2){ ?>
-                        <a href="/?controller=traduction&action=translate" class="btn btn-primary btn-lg " role="button"
-                           aria-pressed="true"><?php echo $translator->getTranslate(15); ?></a>
-                        <a href="/?controller=traduction&action=myRequests" class="btn btn-primary btn-lg " role="button"
-                        aria-pressed="true"><?php echo $translator->getTranslate(23); ?></a>
-<?php                } ?>
-                    <div class="btn-group">
-                          <a href="/?controller=user&action=disconnect" class="btn btn-primary btn-lg" role="button"
-                            aria-pressed="true"><?php echo $translator->getTranslate(1051); ?></a>
+                        <a href="/?controller=traduction&action=translate" class="btn btn-primary btn-lg " role="button"  aria-pressed="true"><?php echo $translator->getTranslate(15); ?></a>
+                        <a href="/?controller=traduction&action=myRequests" class="btn btn-primary btn-lg " role="button" aria-pressed="true"><?php echo $translator->getTranslate(23); ?></a>
 
+                <?php  } ?>
+
+                    <div class="btn-group">
+                          <a href="/?controller=user&action=disconnect" class="btn btn-primary btn-lg" role="button" aria-pressed="true"><?php echo $translator->getTranslate(1051); ?></a>
+                    </div>
+                    <div class="btn-group">
+                          <a href="/?controller=user&action=edit" class="btn btn-primary btn-lg" role="button" aria-pressed="true"><?php echo $translator->getTranslate(28); ?></a>
                     </div>
             </div>
             <?php } ?>
@@ -98,7 +99,7 @@ function showAllWithView($requestedView)
     <div style="text-align: center;">
         <footer>
             <p id="copyright"><?php echo $translator->getTranslate(1050); ?></p>
-            <a id="mentions" href="/?controller=mentions&action=mentions">Mentions légales</a>
+            <a id="mentions" href="/?controller=mentions&action=mentions"><?php echo $translator->getTranslate(26); ?></a>
 
             <p class="w3">
                 <a target="_blank"  href="https://validator.w3.org/nu/?doc=<?php echo getFullURL(); ?>">
@@ -112,15 +113,11 @@ function showAllWithView($requestedView)
             <form id="form-lang" action="/?controller=language&action=changeLanguage" method="post">
                 <div id="choose-language">
                     <input type="hidden" name="lang" id="hidden-language" value="English">
-
                     <?php
-
                     $languages = $translator->getLanguages();
                     foreach ($languages as $key => $value)
                          echo '  <input type="submit" class="btn btn-secondary btn-m" onclick="document.getElementById(\'hidden-language\').value = \'' . $key . '\';"  value="' . $value . '"></input> '
-
-                    ?> 
-                 
+                    ?>                  
                 </div>
             </form>
         </footer>

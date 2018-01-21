@@ -17,6 +17,9 @@ class GestionController extends Controller
         showAllWithView("views/translation/main-handler.php");
     }
 
+    /*
+     * Autorisation ou refus de traduction compte premium
+     */
     public function translationRequestsHandler(){
         $user = Controller::getMainUser();
 
@@ -34,7 +37,7 @@ class GestionController extends Controller
             if($authorize == "true"){
 
                 $translatorBis = new Translator($request->getTranslationLanguage());
-                $added = $translatorBis->add($request->getExpressionId(),$request->getTranslation());
+                $added = $translatorBis->add($request->getExpressionId(),$request->getTranslation(), false);
 
                 if($added)
                     $state = "allowed";
@@ -48,5 +51,32 @@ class GestionController extends Controller
 
         showAllWithView("views/translation/translation-requests-handler.php");
 
+    }
+
+
+/*
+ * Modification de traductions
+ * existante
+ */
+    public function changes(){
+
+        $user = Controller::getMainUser();
+        if(empty($user)) IndexController::index();
+        if($user->getGrade() < 3) IndexController::index();
+
+        $exprID = filter_input(INPUT_POST, "expressionID");
+        $langue = filter_input(INPUT_POST, "language");
+
+        if(empty($langue) OR empty($exprID))
+            showAllWithView("/controller=gestion&action=changes&info=50");
+
+
+        $translatorBis = new Translator($langue);
+
+
+
+        $_SESSION["phrases-changes"] = $translatorBis->getTranslations();
+
+        showAllWithView("views/translation/changes.php");
     }
 }

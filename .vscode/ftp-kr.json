@@ -1,0 +1,18 @@
+{
+    "host": "ftp-projetphpg3.alwaysdata.net",
+    "username": "projetphpg3",
+    "password": "falatava",
+    "remotePath": "/www/",
+    "protocol": "ftp",
+    "port": 21,
+    "fileNameEncoding": "utf8",
+    "ignoreWrongFileEncoding": false,
+    "autoUpload": true,
+    "autoDelete": true,
+    "autoDownload": true,
+    "ignore": [
+        ".git",
+        "/.vscode/chrome",
+        "/.vscode/.key"
+    ]
+}

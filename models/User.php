@@ -82,6 +82,7 @@
         }
 
         public function getPrefLangue(){
+            /* FR, EN */
             return $this->prefLanguage;
         }
 
@@ -181,6 +182,8 @@
         {
             return $this->prefLanguage;
         }
+
+
 
 
     }

@@ -54,21 +54,27 @@ class UserController extends Controller {
         }
     }
 
-    public function addAccount() {
-
-        User::addAccount();
-         
-    }
-
-    public function login() {
-          showAllWithView('views/user/login.php');
-    }
-
     public function disconnect(){
         $user = Controller::getMainUser();
         $user->disconnect();
         redirect('index.php');
     }
+    public function editAccount(){
+            /* Modification des informations */
+
+            
+    }
+    public function addAccount() {
+        User::addAccount();         
+    }
+
+    public function edit(){
+        showAllWithView('views/user/edit.php');
+    }
+
+    public function login() {
+          showAllWithView('views/user/login.php');
+    } 
 
     public function forgot(){
         showAllWithView('views/user/forgot.php');

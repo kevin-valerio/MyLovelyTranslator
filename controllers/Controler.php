@@ -14,11 +14,14 @@ class Controller
         $langue = NULL;
         if(!is_null(self::$mainUser)) {
              $langue = self::$mainUser->getPrefLangue();
+             var_dump($langue);
+             $langue = Translator::getLanguages()[$langue];
+           
          }    
         else { 
             $langue = $_COOKIE['lang']; 
-         }
-         return Translator::getLanguages()[$langue];
+         }         
+        return $langue;
 
     }
     public static function getMainUser(){
@@ -36,7 +39,7 @@ class Controller
 
     public function defineDefaultLanguage(){
         if(is_null(self::$mainUser)){
-            createCookie('lang', 'FR', 168);
+            createCookie('lang', 'Francais', 168);
         }
     }
 

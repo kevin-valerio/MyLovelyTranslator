@@ -14,7 +14,6 @@ select {
     padding-left: 6px;
     -webkit-appearance: none;
     -moz-appearance: none;
-    appearance: none;
 }
 
 .selectpicker {
@@ -33,7 +32,6 @@ select {
     padding-left: 6px;
     -webkit-appearance: none;
     -moz-appearance: none;
-    appearance: none;
 }
 
 select::-ms-expand {
@@ -55,6 +53,12 @@ select::-ms-expand {
     font-size: 18px;
     font-weight: 200;
     padding-left: 6px;
+}
+
+.ccdeol-xs-1 {
+    margin-left: 10%;
+    display: inherit;
+    width: 41%;
 }
 
 
@@ -3902,7 +3906,6 @@ tbody.collapse.show {
     border-radius: 0.25rem;
     -webkit-appearance: none;
     -moz-appearance: none;
-    appearance: none;
 }
 
 .custom-select:focus {
