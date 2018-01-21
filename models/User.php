@@ -6,14 +6,16 @@
         private $username;
         private $password;
         private $prefLanguage;
+        private $grade;
         private $registerKey;
 
-        public function __construct($mail, $username, $pw, $prefLang)
+        public function __construct($mail, $username, $pw, $prefLang, $grade)
         {
             $this->mailAdress = $mail;
             $this->username = $username;
             $this->password = $pw;
             $this->prefLanguage = $prefLang;
+            $this->grade = $grade;
         }
 
 
@@ -152,9 +154,34 @@
                 redirect("/controller=user&action=login&info=0");
                 return;
             }
-            return new User($fetchedUser["mail"], $fetchedUser["pseudo"], $fetchedUser["pass"], $fetchedUser["langue"]);
+            return new User($fetchedUser["mail"], $fetchedUser["pseudo"], $fetchedUser["pass"], $fetchedUser["langue"], $fetchedUser["grade"]);
 
         }
+
+        /**
+         * @return mixed
+         */
+        public function getGrade()
+        {
+            return $this->grade;
+        }
+
+        /**
+         * @return mixed
+         */
+        public function getMailAdress()
+        {
+            return $this->mailAdress;
+        }
+
+        /**
+         * @return mixed
+         */
+        public function getPrefLanguage()
+        {
+            return $this->prefLanguage;
+        }
+
 
     }
 ?>

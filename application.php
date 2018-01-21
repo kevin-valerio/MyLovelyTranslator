@@ -4,7 +4,9 @@ require 'controllers/UserController.php';
 require 'controllers/IndexController.php';
 require 'controllers/MentionsController.php';
 require 'controllers/ActivationController.php';
- 
+require 'controllers/TraductionController.php';
+require 'controllers/GestionController.php';
+
 class Application { 
        
 
@@ -17,7 +19,9 @@ class Application {
             $mainController =  ucfirst($controllerLink) . 'Controller';
             $mainController = new $mainController();
 
-            if (method_exists($mainController, $functionLink)) $mainController->$functionLink();
+            if (method_exists($mainController, $functionLink)) {
+                $mainController->$functionLink();
+            }
             else {
                 IndexController::index();
             }

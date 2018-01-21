@@ -15,8 +15,13 @@
       elseif($informationMsg == '4'){
         Alerte::printAlert(Alerte::SUCCESS, 'Le compte a été validé ! Vous pouvez vous connecter');
       }
- 
- 
+
+    elseif($informationMsg == '5') {
+        Alerte::printAlert(Alerte::SUCCESS, 'Votre demande a été soumise, un traducteur se chargera d\'accepter ou non votre demande');
+    }
+
+
+
 ?>
 
 <div class="body" id="corpsIndex"> <br><br>

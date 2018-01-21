@@ -2698,6 +2698,10 @@ fieldset[disabled] a.btn {
 }
 
 .btn-secondary {
+    margin-left: 10px;
+}
+
+.btn-secondary {
     color: #fff;
     background-color: #868e96;
     border-color: #868e96;

@@ -6,59 +6,83 @@
         {
             "type": "-",
             "name": "application.php",
-            "size": 790
+            "size": 1071
+        },
+        {
+            "type": "-",
+            "name": "BD.sql",
+            "size": 930
         },
         {
             "type": "-",
             "name": "Cahier-des-charges.pdf",
-            "size": 262144
+            "size": 526734
+        },
+        {
+            "type": "d",
+            "name": "codeArthurOld",
+            "size": 4096,
+            "files": []
         },
         {
             "type": "d",
             "name": "controllers",
-            "size": 4096,
+            "size": 68,
             "files": [
                 {
                     "type": "-",
-                    "name": "ActivationController.php",
-                    "size": 367
-                },
-                {
-                    "type": "-",
-                    "name": "Controler.php",
-                    "size": 434
-                },
-                {
-                    "type": "-",
-                    "name": "GradeController.php",
-                    "size": 299
-                },
-                {
-                    "type": "-",
-                    "name": "IndexController.php",
-                    "size": 213
-                },
-                {
-                    "type": "-",
-                    "name": "LanguageController.php",
-                    "size": 687
-                },
-                {
-                    "type": "-",
-                    "name": "MentionsController.php",
-                    "size": 661
+                    "name": "PageController.php",
+                    "size": 134
                 },
                 {
                     "type": "-",
                     "name": "UserController.php",
-                    "size": 2972
+                    "size": 1555
+                },
+                {
+                    "type": "-",
+                    "name": "Page.php",
+                    "size": 132
+                },
+                {
+                    "type": "-",
+                    "name": "IndexController.php",
+                    "size": 134
                 }
             ]
         },
         {
             "type": "-",
+            "name": "database.php",
+            "size": 819
+        },
+        {
+            "type": "-",
             "name": "index.php",
-            "size": 159
+            "size": 153
+        },
+        {
+            "type": "d",
+            "name": "langs",
+            "size": 56,
+            "files": []
+        },
+        {
+            "type": "d",
+            "name": "language",
+            "size": 56,
+            "files": [
+                {
+                    "type": "-",
+                    "name": "lang_EN.json",
+                    "size": 1044
+                },
+                {
+                    "type": "-",
+                    "name": "lang_FR.json",
+                    "size": 1253
+                }
+            ]
         },
         {
             "type": "d",
@@ -73,51 +97,148 @@
                 {
                     "type": "-",
                     "name": "User.php",
-                    "size": 1753
+                    "size": 2723
                 }
             ]
         },
         {
             "type": "d",
-            "name": "utils",
-            "size": 72,
+            "name": "public",
+            "size": 30,
+            "files": []
+        },
+        {
+            "type": "d",
+            "name": "style",
+            "size": 30,
             "files": [
                 {
                     "type": "-",
-                    "name": "alert.php",
-                    "size": 999
-                },
+                    "name": "style.css",
+                    "size": 36
+                }
+            ]
+        },
+        {
+            "type": "-",
+            "name": "Transaltor.php",
+            "size": 642
+        },
+        {
+            "type": "-",
+            "name": "util.php",
+            "size": 1272
+        },
+        {
+            "type": "d",
+            "name": "utils",
+            "size": 52,
+            "files": [
                 {
                     "type": "-",
                     "name": "database.php",
-                    "size": 841
+                    "size": 818
                 },
                 {
                     "type": "-",
                     "name": "util.php",
-                    "size": 796
+                    "size": 710
                 }
             ]
         },
         {
             "type": "d",
             "name": "views",
-            "size": 92,
+            "size": 58,
             "files": [
                 {
                     "type": "d",
-                    "name": "page",
-                    "size": 53,
+                    "name": "layouts",
+                    "size": 112,
                     "files": [
                         {
                             "type": "-",
-                            "name": "index.php",
-                            "size": 1622
+                            "name": "cssJS.php",
+                            "size": 857
                         },
                         {
                             "type": "-",
-                            "name": "mentions.php",
-                            "size": 190
+                            "name": "footer.html",
+                            "size": 22
+                        },
+                        {
+                            "type": "-",
+                            "name": "footer.php",
+                            "size": 126
+                        },
+                        {
+                            "type": "-",
+                            "name": "header.php",
+                            "size": 1059
+                        },
+                        {
+                            "type": "-",
+                            "name": "nav.php",
+                            "size": 1781
+                        },
+                        {
+                            "type": "-",
+                            "name": "menu.php",
+                            "size": 1781
+                        }
+                    ]
+                },
+                {
+                    "type": "d",
+                    "name": "page",
+                    "size": 29,
+                    "files": [
+                        {
+                            "type": "-",
+                            "name": "home.php",
+                            "size": 16
+                        },
+                        {
+                            "type": "-",
+                            "name": "index.php",
+                            "size": 16
+                        }
+                    ]
+                },
+                {
+                    "type": "d",
+                    "name": "user",
+                    "size": 130,
+                    "files": [
+                        {
+                            "type": "-",
+                            "name": "edit.php",
+                            "size": 1373
+                        },
+                        {
+                            "type": "-",
+                            "name": "index.php",
+                            "size": 224
+                        },
+                        {
+                            "type": "-",
+                            "name": "loginPage.php",
+                            "size": 597
+                        },
+                        {
+                            "type": "-",
+                            "name": "login.php",
+                            "size": 597
+                        },
+                        {
+                            "type": "-",
+                            "name": "new.php",
+                            "size": 1050
+                        },
+                        {
+                            "type": "-",
+                            "name": "show.php",
+                            "size": 606
                         }
                     ]
                 }
@@ -126,8 +247,19 @@
         {
             "type": "d",
             "name": ".vscode",
-            "size": 126,
-            "files": []
+            "size": 59,
+            "files": [
+                {
+                    "type": "-",
+                    "name": "ftp-kr.error.log",
+                    "size": 390
+                },
+                {
+                    "type": "-",
+                    "name": "ftp-kr.json",
+                    "size": 742
+                }
+            ]
         }
     ]
 }

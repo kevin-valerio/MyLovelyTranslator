@@ -41,6 +41,13 @@ function showAllWithView($requestedView)
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" href="/">My Lovely Translator</a>
+            <div class="ccdeol-xs-1" align="center">
+
+                <input type="text"  class="form-control" id="search-bar" placeholder="<?php echo $translator->getTranslate(1053);  ?>">
+                <input type="submit" class="btn btn-secondary btn-m" value="<?php echo $translator->getTranslate(1052); ?>" />
+
+            </div>
+
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
                     aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -53,16 +60,25 @@ function showAllWithView($requestedView)
             <?php
             if (is_null($account)) {
                 ?>
-
                 <a href="/?controller=user&action=login" class="btn btn-primary btn-lg " role="button"
                    aria-pressed="true"><?php echo $translator->getTranslate(3); ?></a>
                 <a href="/?controller=user&action=register" class="btn btn-primary btn-lg" role="button"
                    aria-pressed="true"><?php echo $translator->getTranslate(4); ?></a>
 
-            <?php } else { ?>
-
+            <?php
+            } else {
+                    if($account->getGrade() == 3){ ?>
+                        <a href="/?controller=gestion&action=mainHandler" class="btn btn-primary btn-lg " role="button"
+                        aria-pressed="true"><?php echo $translator->getTranslate(16); ?></a>
+<?php                }
+                    if($account->getGrade() == 2){ ?>
+                        <a href="/?controller=traduction&action=translate" class="btn btn-primary btn-lg " role="button"
+                           aria-pressed="true"><?php echo $translator->getTranslate(15); ?></a>
+                        <a href="/?controller=traduction&action=myRequests" class="btn btn-primary btn-lg " role="button"
+                        aria-pressed="true"><?php echo $translator->getTranslate(23); ?></a>
+<?php                } ?>
                     <div class="btn-group">
-                         <a href="/?controller=user&action=disconnect" class="btn btn-primary btn-lg" role="button"
+                          <a href="/?controller=user&action=disconnect" class="btn btn-primary btn-lg" role="button"
                             aria-pressed="true"><?php echo $translator->getTranslate(1051); ?></a>
 
                     </div>
@@ -95,14 +111,13 @@ function showAllWithView($requestedView)
 
             <form id="form-lang" action="/?controller=language&action=changeLanguage" method="post">
                 <div id="choose-language">
-                <input type="hidden" name="lang" id="hidden-language" value="English">
+                    <input type="hidden" name="lang" id="hidden-language" value="English">
 
                     <?php
 
                     $languages = $translator->getLanguages();
-
                     foreach ($languages as $key => $value)
-                         echo '<input type="submit" onclick="document.getElementById(\'hidden-language\').value = \'' . $key . '\';"  value="' . $value . '"></input>'
+                         echo '  <input type="submit" class="btn btn-secondary btn-m" onclick="document.getElementById(\'hidden-language\').value = \'' . $key . '\';"  value="' . $value . '"></input> '
 
                     ?> 
                  
