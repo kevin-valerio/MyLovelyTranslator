@@ -1,7 +1,7 @@
 {
     "host": "ftp-projetphpg3.alwaysdata.net",
     "username": "projetphpg3",
-    "password": "falatava",
+    "password": "fALATAvAaa",
     "remotePath": "/www/",
     "protocol": "ftp",
     "port": 21,
@@ -13,6 +13,7 @@
     "ignore": [
         ".git",
         "/.vscode/chrome",
-        "/.vscode/.key"
+        "/.vscode/.key",
+        "/.vscode/ftp-kr.json"
     ]
 }
