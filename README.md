@@ -21,7 +21,7 @@
 | :| que MySQL,CSS3, HTML5 et Bootstrap afin de produire le site.| :|</ br>
 | :| Bootstrap nous a permis de pouvoir avoir un site ergonomique| :|</ br>
 | :| pratique et "beau" visuellement. Enfin, l'utilisation       | :|</ br>
-| :| du pattern MVC (Modele vue Controlleur) nous a permit de    | :|</ br>
+| :| du pattern MVC (Modele vue Controlleur) nous a permit de    | :|<br>
 | :| pouvoir utiliser PHP orienté Objet de manière aisé afin de  | :|</ br>
 | :| rendre notre application ouverte, adaptable.                | :|</ br>
 | :|                                                             | :|</ br>
