@@ -5,10 +5,9 @@ require_once 'views/core.php';
 
 class MentionsController extends Controller
 {
-
-    function __construct(){
+    function __construct()
+    {
         parent::checkIfValidURL();
-
     }
 
     public function mentions()
@@ -16,9 +15,8 @@ class MentionsController extends Controller
         showAllWithView('views/page/mentions.php');
     }
 
-
-    public static function getMentionById($id){
-   
+    public static function getMentionById($id)
+    {
         $pdo = Database::getConnection();
         $query = $pdo->prepare("SELECT expression FROM " . Controller::getLangueInAnyContext() . " WHERE id = :id");
         $query->execute(array("id" => $id));
@@ -26,7 +24,5 @@ class MentionsController extends Controller
 
         return $fetchedMention["expression"];
     }
-
 }
-
 ?>

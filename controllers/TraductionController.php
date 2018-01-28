@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Fallou
- * Date: 19/01/2018
- * Time: 11:00
- */
 
 require_once 'models/User.php';
 require_once 'utils/util.php';
@@ -15,13 +9,16 @@ require_once 'models/TranslationRequest.php';
 
 class TraductionController extends Controller
 {
-
-    public function translate(){
-
+    /*
+     * Affiche la vue qui permettra de saisir les données nécessaire à la demande de traduction
+     */
+    public function translate()
+    {
         $user = Controller::getMainUser();
 
-        if(empty($user) OR $user->getGrade() != 2)
+        if (empty($user) OR $user->getGrade() < 2) {
             IndexController::index();
+        }
 
         $translator = new Translator($user->getPrefLanguage());
 
@@ -29,38 +26,58 @@ class TraductionController extends Controller
         showAllWithView('views/translation/translate.php');
     }
 
-    public function myRequests(){
+    /*
+     * Fonction qui affiche les demandes de l'utilisateur connecté
+     */
+    public function myRequests()
+    {
         $user = Controller::getMainUser();
 
-        if(empty($user) OR $user->getGrade() != 2)
+        if (empty($user) OR $user->getGrade() < 2) {
             IndexController::index();
+        }
 
-        $_SESSION["my-requests"] = TranslationRequest::getByEmail($user->getMailAdress());
-
+        $_SESSION["my-requests"] = TranslationRequest::getByEmail($user->getMail());
 
         showAllWithView('views/translation/premium-requests.php');
     }
 
-    public function add(){
-
+    /*
+     * Permet d'ajouter la demande de traduction dans la base
+     * si la phrase recherché existe (Search::)
+     */
+    public function add()
+    {
         $user = Controller::getMainUser();
 
-        if(empty($user) OR $user->getGrade() != 2)
+        if (empty($user) OR $user->getGrade() <= 1) {
             IndexController::index();
+        }
 
-        $expressionId = filter_input(INPUT_POST, 'expressionId');
-        $phrase = filter_input(INPUT_POST, 'translation');
-        $langue = filter_input(INPUT_POST, 'language');
+        $languageSource = filter_input(INPUT_POST, 'languageSource');
+        $languageDest = filter_input(INPUT_POST, 'languageDest');
+        $searchSentence = filter_input(INPUT_POST, 'searchSentence');
+        $translateSentence = filter_input(INPUT_POST, 'translateSentence');
 
+        if (empty($searchSentence) OR empty($translateSentence)) {
+            redirect("/?controller=traduction&action=translate&info=50");
+        }
+        $idSentence = Search::searchExpression($searchSentence, $languageSource);
 
-        if(empty($phrase) OR empty($langue))
-            redirect("/?controller=traduction&action=translate&info=7");
-
-        // on ajoute la demande de traduction et un compta traducteur gerera tous ca
-        $tr = new TranslationRequest(null, $expressionId, $phrase,$langue, $user->getMailAdress(), null);
-        if (!$tr->addRequest())
-            redirect("/?controller=traduction&action=translate&info=9");
-        else
-            redirect("/?info=5");
+        if ($idSentence != 0) {
+            if (empty($languageSource) OR empty($languageDest)) {
+                redirect("/?controller=traduction&action=translate&info=50");
+            }
+            // on ajoute la demande de traduction et un compta traducteur gerera tous ca
+            $tr = new TranslationRequest(null, $idSentence, $translateSentence, $languageSource, $user->getMail(), null);
+            if (!$tr->addRequest()) {
+                redirect("/?controller=traduction&action=translate&info=52");
+            }
+            else {
+                redirect("/?controller=traduction&action=translate&info=51");
+            }
+        } else {
+            redirect("/?controller=traduction&action=translate&info=53");
+        }
     }
 }

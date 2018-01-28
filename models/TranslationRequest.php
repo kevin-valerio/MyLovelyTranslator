@@ -27,23 +27,25 @@ class TranslationRequest
         $this->state = $state;
     }
 
-    public function addRequest(){
+    public function addRequest()
+    {
         $pdo = Database::getConnection();
 
         $added = $pdo->prepare("INSERT INTO translation_request (expressionId, translation, translation_language, translator, state)
                                           VALUES (:expressionId, :translation, :tl, :translator, :state)");
         $added->execute(array(
-           "expressionId" => $this->expressionId,
-           "translation"  => $this->translation,
-           "tl"           => $this->translationLanguage,
-           "translator"   => $this->translator,
-            "state"       => "waiting"
+            "expressionId" => $this->expressionId,
+            "translation" => $this->translation,
+            "tl" => $this->translationLanguage,
+            "translator" => $this->translator,
+            "state" => "waiting"
         ));
 
         return $added;
     }
 
-    public static function getAll(){
+    public static function getAll()
+    {
         $pdo = Database::getConnection();
 
         $query = $pdo->prepare("SELECT * FROM translation_request WHERE state=:state");
@@ -51,18 +53,21 @@ class TranslationRequest
             "state" => "waiting"
         ));
 
-        if(empty($query)) return false;
+        if (empty($query)) {
+            return false;
+        }
 
         $requests = [];
 
-        while($tuple = $query->fetch())
+        while ($tuple = $query->fetch())
             array_push($requests, new TranslationRequest($tuple["id"], $tuple["expressionid"], $tuple["translation"], $tuple["translation_language"], $tuple["translator"], $tuple["state"]));
 
         return $requests;
 
     }
 
-    public static function get($id){
+    public static function get($id)
+    {
         $pdo = Database::getConnection();
 
         $query = $pdo->prepare("SELECT * FROM translation_request WHERE id= :id");
@@ -71,7 +76,9 @@ class TranslationRequest
         ));
 
 
-        if(empty($query)) return false;
+        if (empty($query)) {
+            return false;
+        }
 
         $tuple = $query->fetch();
 
@@ -79,10 +86,12 @@ class TranslationRequest
 
     }
 
-    public function setState($state){
+    public function setState($state)
+    {
 
-        if($state != "allowed" AND $state != "rejected")
+        if ($state != "allowed" AND $state != "rejected") {
             return null;
+        }
 
         $pdo = Database::getConnection();
 
@@ -90,14 +99,15 @@ class TranslationRequest
                                           SET state = :state 
                                           WHERE id= :id");
         $query->execute(array(
-           "id" => $this->id,
-           "state" => $state
+            "id" => $this->id,
+            "state" => $state
         ));
 
         return $query == true;
     }
 
-    public static function getByEmail($email){
+    public static function getByEmail($email)
+    {
         $pdo = Database::getConnection();
 
         $query = $pdo->prepare("SELECT * FROM translation_request WHERE translator= :email");
@@ -106,11 +116,13 @@ class TranslationRequest
         ));
 
 
-        if(empty($query)) return false;
+        if (empty($query)) {
+            return false;
+        }
 
         $requests = [];
-        while($tuple = $query->fetch())
-            array_push($requests,new TranslationRequest($tuple["id"], $tuple["expressionid"], $tuple["translation"], $tuple["translation_language"], $tuple["translator"], $tuple["state"]));
+        while ($tuple = $query->fetch())
+            array_push($requests, new TranslationRequest($tuple["id"], $tuple["expressionid"], $tuple["translation"], $tuple["translation_language"], $tuple["translator"], $tuple["state"]));
 
         return $requests;
     }
@@ -162,7 +174,6 @@ class TranslationRequest
     {
         return $this->state;
     }
-
 
 
 }

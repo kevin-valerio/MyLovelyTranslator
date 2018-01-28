@@ -1,46 +1,70 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Fallou
- * Date: 19/01/2018
- * Time: 12:01
- */ ?>
 
-<form action="/?controller=traduction&action=add" method="post">
+$translations = isset($_SESSION["phrases"]) ? $_SESSION["phrases"] : null;
+?>
 
-    <div class="form-group">
-        <select class="form-group" name="expressionId"><?
-    while($tuple = $_SESSION["phrases"]->fetch()) {?>
-            <option value="<?php echo $tuple["id"]?>"> <?php echo $tuple["expression"] ?> </option>;
-    <? } ?>
-        </select>
-    </div>
- <div class="form-group">
-    <label for="mail">Traduction</label>
-     <input type="text" class="form-control" name="translation" placeholder="La phrase à traduire">
-  </div>
-  <div class="form-group">
-    <label for="password">Langue</label>
-    <select class="form-group" name="language">
-        <option value="FR">Francais</option>
-        <option value="EN">Anglais</option>
-    </select>
-  </div>
-  <button type="submit" class="btn btn-primary">Effectuer demande de traduction</button>
+    <form action="/?controller=traduction&action=add" method="post">
 
-</form>
+        <h2><?php echo $translator->getTranslate(15); ?></h2>
+        <br>
+        <p><?php echo $translator->getTranslate(1110); ?></p>
+
+        <br>
+
+        <div class="form-group">
+            <?php echo $translator->getTranslate(1119); ?>
+            <?php echo '</br>' ?>
+
+            <?php
+            $languages = $translator->getLanguages();
+            echo "<select class=\"form-group\" name=\"languageSource\">";
+            foreach ($languages as $key => $value) {
+                echo "    <option value='$value'>$value</option> ";
+            }
+            echo "</select>";
+            ?>
+
+            <?php echo '</br>' ?>
+            <input type="text" class="form-control" name="searchSentence"
+                   placeholder="<?php echo $translator->getTranslate(1121); ?>">
+            <?php echo '</br>' ?>
+            <?php echo $translator->getTranslate(1120); ?>
+            <?php echo '</br>' ?>
+
+            <?php
+            $languages = $translator->getLanguages();
+            echo "<select class=\"form-group\" name=\"languageDest\">";
+            foreach ($languages as $key => $value) {
+                echo "    <option value='$value'>$value</option> ";
+            }
+            echo "</select>";
+            ?>
+
+            <?php echo '</br>' ?>
+            <input type="text" class="form-control" name="translateSentence"
+                   placeholder="<?php echo $translator->getTranslate(1122); ?>">
+            <?php echo '</br>' ?>
+            <button type="submit" class="btn btn-primary"><?php echo $translator->getTranslate(1062); ?></button>
+        </div>
+
+    </form>
 
 <?php
-
-
 $informationMsg = filter_input(INPUT_GET, 'info');
 
-if($informationMsg == '7'){
-    Alerte::printAlert(Alerte::INFO, 'Les identifiants sont mal saisis, veuillez recommencer');
-}
-if($informationMsg == '9'){
-    Alerte::printAlert(Alerte::DANGER, "Une erreure liée à la base de donnée est survenue ! ");
+if ($informationMsg == '50') {
+    Alerte::printAlert(Alerte::DANGER, 'Merci de saisir les données demandées');
 }
 
+if ($informationMsg == '51') {
+    Alerte::printAlert(Alerte::SUCCESS, 'Merci de votre demande, elle sera bientôt traitée');
+}
+if ($informationMsg == '52') {
+    Alerte::printAlert(Alerte::DANGER, "Erreur inconnue");
+}
+
+if ($informationMsg == '53') {
+    Alerte::printAlert(Alerte::DANGER, "Cette expresssion n'a pas été trouvée dans la base");
+}
 
 ?>

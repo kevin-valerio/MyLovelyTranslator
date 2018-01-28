@@ -5,7 +5,9 @@ require 'controllers/IndexController.php';
 require 'controllers/MentionsController.php';
 require 'controllers/ActivationController.php';
 require 'controllers/TraductionController.php';
+require 'controllers/AdministrationController.php';
 require 'controllers/GestionController.php';
+require 'controllers/SearchController.php';
 
 class Application { 
        

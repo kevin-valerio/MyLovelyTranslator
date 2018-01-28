@@ -1,13 +1,18 @@
 <!-- Formulaire inscription -->
 
 <?php
-        $passwordDontMatch = filter_input(INPUT_GET, 'match');
-        if($passwordDontMatch == '1') Alerte::printAlert(Alerte::WARNING, ' Les mots de passes ne sont pas identiques');
- 
+$passwordDontMatch = filter_input(INPUT_GET, 'match');
+if ($passwordDontMatch == '1') {
+    Alerte::printAlert(Alerte::WARNING, ' Les mots de passes ne sont pas identiques');
+}
+if ($passwordDontMatch == '2') {
+    Alerte::printAlert(Alerte::DANGER, ' Vous n\'avez pas accepté les CGU !');
+}
+
 
 ?>
 <br><br>
-    <div id="main-content">
+<div id="main-content">
     <form action="?controller=user&action=addAccount" method="post">
 
         <!-- Email -->
@@ -18,7 +23,7 @@
 
         <!-- Pseudo -->
         <div class="form-group">
-            <input type="text" class="form-control" name="pseudo"  placeholder="Pseudo">
+            <input type="text" class="form-control" name="pseudo" placeholder="Pseudo">
         </div>
 
         <!-- Mot de passe -->
@@ -31,14 +36,12 @@
             <input type="password" name="confirmPassword" class="form-control" placeholder="Répéter le mot de passe">
         </div>
 
-
         <!-- Langue -->
 
         <?php
 
-             
-            $languages = Translator::getLanguages();
-            foreach ( $languages as $key => $value ) echo '
+        $languages = Translator::getLanguages();
+        foreach ($languages as $key => $value) echo '
                 <div class="form-check">
                     <label>
                         <input type="radio" name="langue" checked value="' . $key . '"> <span class="label-text">' . $value . '</span>
@@ -49,10 +52,19 @@
 
         ?>
 
+        <br>
+        <div class="form-check">
+            <label>
+                <input type="checkbox" name="conditions" id="conditions" value="1"> <a <a
+                        href="/?controller=mentions&action=mentions" target="_blank">J'accepte les conditions
+                    d'utilisation</a>
+            </label>
+        </div>
 
-        <br><br>
+        <br>
 
-        <!-- Privilege/Grade -->
+        <!-- Privilege/Grade - PLUS POSSIBLE
+
         <div class="form-check">
             <label>
                 <input type="radio" name="grade" checked value="1"> <span class="label-text"><?php echo $translator->getTranslate(12); ?></span>
@@ -73,9 +85,10 @@
                 <input type="radio" name="grade" value="4"> <span class="label-text">Administrateur</span>
             </label>
         </div>
+        -->
 
         <!-- S'inscrire -->
         <button type="submit" class="btn btn-primary">S'inscrire</button>
     </form>
 
-    </div>
+</div>

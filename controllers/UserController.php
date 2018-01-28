@@ -60,20 +60,33 @@ class UserController extends Controller {
         redirect('index.php');
     }
     public function editAccount(){
-            /* Modification des informations */
 
-            
+        $pseudo = filter_input(INPUT_POST, 'pseudo');
+        $password = filter_input(INPUT_POST, 'password');
+        $lang = filter_input(INPUT_POST, 'lang');
+        $grade = filter_input(INPUT_POST, 'grade');
+
+        $_SESSION["user-edit"]->setPseudo($pseudo);
+        $_SESSION["user-edit"]->setPrefLanguage($lang);
+        $_SESSION["user-edit"]->setGrade($grade);
+        if($password != ""){
+            $_SESSION["user-edit"]->setPassword($password);
+        }
+
+        redirect("?controller=user&action=edit&info=1");
     }
     public function addAccount() {
         User::addAccount();         
     }
 
     public function edit(){
+        $_SESSION['user-edit'] = self::getMainUser();
+        $_SESSION['user-action'] = 'controller=user&action=editAccount';
         showAllWithView('views/user/edit.php');
     }
 
     public function login() {
-          showAllWithView('views/user/login.php');
+        showAllWithView('views/user/login.php');
     } 
 
     public function forgot(){
